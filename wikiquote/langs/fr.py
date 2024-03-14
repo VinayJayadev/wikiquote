@@ -29,22 +29,13 @@ def qotd_old_method(html_tree: lxml.html.HtmlElement) -> Tuple[Text, Text]:
 
 
 def qotd_new_method(html_tree: lxml.html.HtmlElement) -> Tuple[Text, Text]:
-    tree = html_tree.get_element_by_id("mf-cdj")
-    lines = [
-        line.strip().replace("\xa0", " ") for line in tree.text_content().splitlines()
-    ]
+    quote_element = html_tree.xpath('//blockquote/p')[0]
+    quote_text = quote_element.text_content().strip().replace("«\xa0", ' ').replace("\xa0",'').replace("»",'')
+    author_element = html_tree.xpath('//p[@style="margin:-0.7em 0 0.3em 6em"]/a')[0]
+    author_text = author_element.text_content().strip()
 
-    for line in lines:
-        matches = re.search(r"«(.+?)»(.+)", line)
-        if not matches:
-            continue
+    return quote_text, author_text
 
-        quote = matches.group(1).strip()
-        author = matches.group(2).strip("-—– \n")
-
-        return quote, author
-
-    raise Exception("Could not parse quote of the day from page contents.")
 
 
 def qotd(html_tree: lxml.html.HtmlElement) -> Tuple[Text, Text]:
