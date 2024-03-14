@@ -1,5 +1,5 @@
 # Changelog for `wikiquote`
-## **0.1.18** - 14/03/2023=4
+## **0.1.18** - 14/03/2023
 - Fixed the issues in quote of the day retrieval for the languages: French, Portuguese, Espanyol, Polski and Euskara .
 
 ## **0.1.17** - 20/08/2023
