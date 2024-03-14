@@ -10,7 +10,6 @@ HEADINGS = ["Veja também", "Referências"]
 
 
 def extract_quotes(tree: lxml.html.HtmlElement, max_quotes: int) -> List[Text]:
-
     dl_list = tree.xpath("//dl")
     for dl in dl_list:
         dl.getparent().remove(dl)
