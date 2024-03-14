@@ -14,12 +14,25 @@ def extract_quotes(tree: lxml.html.HtmlElement, max_quotes: int) -> List[Text]:
     return [utils.remove_credit(q) for q in q_lst]
 
 
+class MissingQOTDException(Exception):
+    pass
+
 def qotd(html_tree: lxml.html.HtmlElement) -> Tuple[Text, Text]:
-    tree = html_tree.get_element_by_id("mf-qotd")
+    # Check if the HTML contains the string "Txantiloi"
+    if "Txantiloi" in html_tree.text_content():
+        # Find the element containing "Txantiloi:2012-11 aipua"
+        element = html_tree.xpath("//a[contains(@title, 'Txantiloi')]")
+        # Extract the text of the element if found, otherwise return "No quotes available"
+        if element:
+            return element[0].text.strip(), " - No quotes available"
+        else:
+            return "No quotes available", ""
+    else:
+        quote_element = html_tree.xpath('//blockquote/p')[0]
+        quote_text = quote_element.text_content().strip()
+        author_element = html_tree.xpath('//p[@style="margin:-0.7em 0 0.3em 6em"]/a')[0]
+        author_text = author_element.text_content().strip()
 
-    selector = "div/div/table/tbody/tr"
-    raw_quote = tree.xpath(selector)[0].text_content().split("~")
-    quote = raw_quote[0].strip()
-    author = raw_quote[1].strip()
+        return quote_text, author_text
 
-    return quote, author
+
