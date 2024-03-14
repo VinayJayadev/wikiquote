@@ -97,9 +97,6 @@ Use `random.choice()` to select a random quote from an article:
 # 'WE DO NOT BREAK USERSPACE!'
 ```
 
-## Caveats
-In some cases, `wikiquote` may fail to retrieve quotes from some articles, or the quote of the day (QOTD). This is due to Wikiquote.org's varying internal article layouts: some quotes may be contained in `div` elements, others in `li`, etc. depending on the article and the language.
-
 ## Developing
 [Poetry](https://python-poetry.org/) is required to develop `wikiquote`.
 
