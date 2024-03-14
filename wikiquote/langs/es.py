@@ -18,9 +18,9 @@ def qotd(html_tree: lxml.html.HtmlElement) -> Tuple[Text, Text]:
 
     quote_container = tree.xpath("div/table/tbody/tr")
     raw_quote = quote_container[0].text_content().split("~")
-    quote = raw_quote[0].strip()
+    quote = raw_quote[0].strip().replace("\n", "").replace("  ","")
 
     raw_author = quote_container[1].xpath("td/div/a")[0].text_content()
     author = raw_author.strip()
 
-    return utils.clean_txt(quote), author
+    return quote, author
