@@ -1,4 +1,7 @@
 # Changelog for `wikiquote`
+## **0.1.18** - 14/03/2023=4
+- Fixed the issues in quote of the day retrieval for the languages: French, Portuguese, Espanyol, Polski and Euskara .
+
 ## **0.1.17** - 20/08/2023
 - Dropped support for Python 3.6 and 3.7 (3.8 is now the minimum).
 
